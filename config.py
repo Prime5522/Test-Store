@@ -33,7 +33,6 @@ DB_URI = os.environ.get("DATABASE_URL", "")
 DB_NAME = os.environ.get("DATABASE_NAME", "PrimeBotz")
 #--------------------------------------------
 FSUB_LINK_EXPIRY = int(os.getenv("FSUB_LINK_EXPIRY", "-1002043502363"))  # 0 means no expiry
-FORCE_SUB_CHANNEL2 = int(os.getenv("FORCE_SUB_CHANNEL2", "-1002323796637"))  
 BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/prime_botz_Support")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "200"))
 #--------------------------------------------
