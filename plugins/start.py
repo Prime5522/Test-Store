@@ -98,9 +98,26 @@ async def start_command(client: Client, message: Message):
         codeflix_msgs = []
 
         for msg in messages:
-            original_caption = msg.caption.html if msg.caption else ""
+            # Try to get internal file name from different media types
+            file_name = None
+            if msg.document:
+                file_name = msg.document.file_name
+            elif msg.video:
+                file_name = msg.video.file_name
+            elif msg.audio:
+                file_name = msg.audio.file_name
+            elif msg.animation:
+                file_name = msg.animation.file_name
+            elif msg.voice:
+                file_name = "Voice Message"
+            elif msg.video_note:
+                file_name = "Video Note"
+
+            # Use file_name if exists, else use original caption
+            original_caption = file_name if file_name else (msg.caption.html if msg.caption else "")
             caption = f"{original_caption}\n\n{CUSTOM_CAPTION}" if CUSTOM_CAPTION else original_caption
-            reply_markup = msg.reply_markup if DISABLE_CHANNEL_BUTTON else None
+
+            reply_markup = msg.reply_markup if not DISABLE_CHANNEL_BUTTON else None
 
             try:
                 snt_msg = await msg.copy(
