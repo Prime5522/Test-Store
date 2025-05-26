@@ -117,28 +117,35 @@ async def start_command(client: Client, message: Message):
             original_caption = file_name if file_name else (msg.caption.html if msg.caption else "")
             caption = f"{original_caption}\n\n{CUSTOM_CAPTION}" if CUSTOM_CAPTION else original_caption
 
-            reply_markup = msg.reply_markup if not DISABLE_CHANNEL_BUTTON else None
+            # Custom Buttons
+            custom_buttons = InlineKeyboardMarkup([
+                [InlineKeyboardButton("⭐ Join Channel", url="https://t.me/YourChannelUsername")],
+                [InlineKeyboardButton("🔁 Share Bot", switch_inline_query="")],
+                [InlineKeyboardButton("❓ Help", callback_data="help_menu")]
+            ])
 
             try:
                 snt_msg = await msg.copy(
                     chat_id=message.from_user.id,
                     caption=caption,
                     parse_mode=ParseMode.HTML,
-                    reply_markup=reply_markup,
+                    reply_markup=custom_buttons,
                     protect_content=PROTECT_CONTENT
                 )
                 await asyncio.sleep(0.5)
                 codeflix_msgs.append(snt_msg)
+
             except FloodWait as e:
                 await asyncio.sleep(e.x)
                 copied_msg = await msg.copy(
                     chat_id=message.from_user.id,
                     caption=caption,
                     parse_mode=ParseMode.HTML,
-                    reply_markup=reply_markup,
+                    reply_markup=custom_buttons,
                     protect_content=PROTECT_CONTENT
                 )
                 codeflix_msgs.append(copied_msg)
+
             except:
                 pass
 
