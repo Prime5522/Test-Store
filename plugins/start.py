@@ -119,10 +119,12 @@ async def start_command(client: Client, message: Message):
 
             # Custom Buttons
             custom_buttons = InlineKeyboardMarkup([
-                [InlineKeyboardButton("⭐ Join Channel", url="https://t.me/YourChannelUsername")],
-                [InlineKeyboardButton("🔁 Share Bot", switch_inline_query="")],
-                [InlineKeyboardButton("❓ Help", callback_data="help_menu")]
-            ])
+    [
+        InlineKeyboardButton("🍿 ᴘʀɪᴍᴇ ᴄɪɴᴇᴢᴏɴᴇ", url="https://t.me/PrimeCineZone"),
+        InlineKeyboardButton("〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ", url="https://t.me/Prime_Botz")
+    ],
+    [InlineKeyboardButton("🔍 ᴘʀɪᴍᴇ ʀᴇQᴜᴇꜱᴛ ɢʀᴏᴜᴘ 🎬", url="https://t.me/PrimeCineZone/143")]
+])
 
             try:
                 snt_msg = await msg.copy(
