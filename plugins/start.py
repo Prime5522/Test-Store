@@ -75,7 +75,7 @@ async def start_command(client: Client, message: Message):
     if len(text) > 7:
         if AUTH_CHANNEL:
             try:
-                btn = await is_subscribed(client, message, AUTH_CHANNEL)
+                btn = await is_subscribedp(client, message, AUTH_CHANNEL)
                 if btn:
                     username = (await client.get_me()).username
                     if len(message.command) > 1:
