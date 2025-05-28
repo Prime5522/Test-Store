@@ -167,8 +167,11 @@ async def start_command(client: Client, message: Message):
                 file_name = "Video Note"
                 file_size = msg.video_note.file_size
 
-            formatted_size = f"<b>📁 ꜰɪʟᴇ sɪᴢᴇ : </b> {format_size(file_size)}\n" if file_size else ""
-
+            formatted_size = (
+    f"╭─────────────⍟\n"
+    f"├📦 ꜰɪʟᴇ sɪᴢᴇ : {format_size(file_size)}\n"
+    f"╰─────────────⍟\n"
+) if file_size else ""
             # Use file_name if exists, else use original caption
             original_caption = file_name if file_name else (msg.caption.html if msg.caption else "")
             caption = f"<b>🗃️ ꜰɪʟᴇ ɴᴀᴍᴇ : </b> @PrimeCineHub <a href='https://t.me/PrimeCineZone'>{original_caption}</a>\n\n{formatted_size}\n\n{CUSTOM_CAPTION}" if CUSTOM_CAPTION else original_caption
@@ -238,17 +241,22 @@ async def start_command(client: Client, message: Message):
             except Exception as e:
                 print(f"Error updating notification with 'Get File Again' button: {e}")
     else:
-        reply_markup = InlineKeyboardMarkup(
-            [
-                    [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/Nova_Flix/50")],
-
+        reply_markup = InlineKeyboardMarkup([
     [
-                    InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data = "about"),
-                    InlineKeyboardButton('ʜᴇʟᴘ •', callback_data = "help")
-
+        InlineKeyboardButton("🔎 ʀᴇǫᴜᴇsᴛ ɢʀᴏᴜᴘ 🎞️", url="https://t.me/+OG3sftDEbZ9kMzFl"),
+        InlineKeyboardButton("〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/Prime_Botz")
+    ],
+    [
+        InlineKeyboardButton("🍿 ᴘʀɪᴍᴇ ᴄɪɴᴇᴢᴏɴᴇ 🗃️", url="https://t.me/PrimeCineHub")
+    ],
+    [
+        InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data='help'),
+        InlineKeyboardButton("〆 ᴀʙᴏᴜᴛ 〆", callback_data='about')
+    ],
+    [
+        InlineKeyboardButton("✧ ᴄʀᴇᴀᴛᴏʀ ✧", url="https://t.me/Prime_Nayem")
     ]
-            ]
-        )
+])
         await message.reply_photo(
             photo=START_PIC,
             caption=START_MSG.format(
@@ -324,7 +332,7 @@ async def not_joined(client: Client, message: Message):
                 except Exception as e:
                     print(f"Error with chat {chat_id}: {e}")
                     return await temp.edit(
-                        f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @rohit_1888</i></b>\n"
+                        f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @Prime_Admin_Support_ProBot</i></b>\n"
                         f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
                     )
 
@@ -354,7 +362,7 @@ async def not_joined(client: Client, message: Message):
     except Exception as e:
         print(f"Final Error: {e}")
         await temp.edit(
-            f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @rohit_1888</i></b>\n"
+            f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @Prime_Admin_Support_ProBot</i></b>\n"
             f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
         )
 
