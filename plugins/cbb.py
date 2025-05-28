@@ -42,17 +42,31 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             text=START_MSG.format(first=query.from_user.first_name),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("ʜᴇʟᴘ", callback_data='help'),
-                 InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data='about')]
+                [
+                    InlineKeyboardButton("🔎 ʀᴇQᴜᴇsᴛ ɢʀᴏᴜᴘ 🎞️", url="https://t.me/+OG3sftDEbZ9kMzFl"),
+                    InlineKeyboardButton("〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/Prime_Botz")
+                ],
+                [
+                    InlineKeyboardButton("🍿 ᴘʀɪᴍᴇ ᴄɪɴᴇᴢᴏɴᴇ 🗃️", url="https://t.me/PrimeCineHub")
+                ],
+                [
+                    InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data='help'),
+                    InlineKeyboardButton("〆 ᴀʙᴏᴜᴛ 〆", callback_data='about')
+                ],
+                [
+                    InlineKeyboardButton("✧ ᴄʀᴇᴀᴛᴏʀ ✧", url="https://t.me/Prime_Nayem")
+                ]
             ])
-        )
+                                     )
 
     elif data == "close":
-        await query.message.delete()
         try:
-            await query.message.reply_to_message.delete()
-        except:
-            pass
+            if query.message:
+                await query.message.delete()
+                if query.message.reply_to_message:
+                    await query.message.reply_to_message.delete()
+        except Exception as e:
+            print(f"Error in close: {e}")
 
     elif data.startswith("rfs_ch_"):
         cid = int(data.split("_")[2])
