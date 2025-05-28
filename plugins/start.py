@@ -146,22 +146,32 @@ async def start_command(client: Client, message: Message):
         for msg in messages:
             # Try to get internal file name from different media types
             file_name = None
+            file_size = None
+            
             if msg.document:
                 file_name = msg.document.file_name
+                file_size = msg.document.file_size
             elif msg.video:
                 file_name = msg.video.file_name
+                file_size = msg.video.file_size
             elif msg.audio:
                 file_name = msg.audio.file_name
+                file_size = msg.audio.file_size
             elif msg.animation:
                 file_name = msg.animation.file_name
+                file_size = msg.animation.file_size
             elif msg.voice:
                 file_name = "Voice Message"
+                file_size = msg.voice.file_size
             elif msg.video_note:
                 file_name = "Video Note"
+                file_size = msg.video_note.file_size
+
+            formatted_size = f"<b>📁 ꜰɪʟᴇ sɪᴢᴇ : </b> {format_size(file_size)}\n" if file_size else ""
 
             # Use file_name if exists, else use original caption
             original_caption = file_name if file_name else (msg.caption.html if msg.caption else "")
-            caption = f"<b>🗃️ ꜰɪʟᴇ ɴᴀᴍᴇ : </b> @PrimeCineHub <a href='https://t.me/PrimeCineZone'>{original_caption}</a>\n\n{CUSTOM_CAPTION}" if CUSTOM_CAPTION else original_caption
+            caption = f"<b>🗃️ ꜰɪʟᴇ ɴᴀᴍᴇ : </b> @PrimeCineHub <a href='https://t.me/PrimeCineZone'>{original_caption}</a>\n\n{formatted_size}\n\n{CUSTOM_CAPTION}" if CUSTOM_CAPTION else original_caption
 
             # Custom Buttons
             custom_buttons = InlineKeyboardMarkup([
