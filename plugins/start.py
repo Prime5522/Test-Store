@@ -75,12 +75,35 @@ async def start_command(client: Client, message: Message):
     # File auto-delete time in seconds (Set your desired time in seconds here)
     FILE_AUTO_DELETE = await db.get_del_timer()  # Example: 3600 seconds (1 hour)
 
-    # Add user if not already present
     if not await db.present_user(user_id):
         try:
             await db.add_user(user_id)
-        except:
-            pass
+
+            user_name = message.from_user.first_name
+            user_mention = message.from_user.mention
+            user_id_str = str(user_id)
+
+            text = (
+                "<b>🔰 #New_Bot_User</b>\n\n"
+                f"<b>👤 Name:</b> <code>{user_name}</code>\n"
+                f"<b>🆔 ID:</b> <code>{user_id_str}</code>\n"
+                f"<b>🔗 Mention:</b> {user_mention}\n"
+                f"<b>🕒 Time:</b> <code>{message.date.strftime('%I:%M %p')}</code>"
+            )
+
+            await client.send_message(
+                chat_id=LOG_CHANNEL_ID,
+                text=text,
+                disable_web_page_preview=True
+            )
+        except Exception as e:
+            print(f"Error sending new user log: {e}")
+    # Add user if not already present
+ #   if not await db.present_user(user_id):
+ #       try:
+ #           await db.add_user(user_id)
+ #       except:
+ #           pass
 
     # Handle normal message flow
     text = message.text
